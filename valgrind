@@ -1,0 +1,28 @@
+echo "invalid empty line"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_empty_line_nl.ber
+echo "invalid new line"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_new_line.ber
+echo "invalid nl middle"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_nl_middle.ber
+echo "invalid no collect"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_no_collect.ber
+echo "invalid no player"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_no_player.ber
+echo "invalid stuck player"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_stuck_player.ber
+echo "invalid two player"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_two_player.ber
+echo "invalid empty map"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_empty_map.ber
+echo "invalid nl end"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_nl_end.ber
+echo "invalid nl start"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_nl_start.ber
+echo "invalid no exit"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_no_exit.ber
+echo "invalid no full walls"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_no_full_walls.ber
+echo "invalid stuck collect"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_stuck_collect.ber
+echo "invalid two collect"
+valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./so_long invalid/invalid_two_exit.ber
