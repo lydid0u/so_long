@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:04:50 by adzinabi          #+#    #+#             */
-/*   Updated: 2023/09/23 18:31:01 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:40:16 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_jeu
     int     perso;
     int     exit;
     int     len;
-    char    **map_flood;
-    char    **map_parser;
+    char    **map_f;
+    char    **map_p;
     int     x;
     int     y;
 }           t_jeu;
@@ -42,30 +42,43 @@ typedef struct s_mlx
     void	*mlx_ptr;
     void	*win_ptr;
     void    *perso;
-    void    *collectible;
+    void    *coin;
     void    *exit;
     void    *wall;
     void    *floor;
-    int     largeur;
-    int     hauteur;
-    
+    int     j;
+    int     i;
 }	t_mlx;
 
-int 	creation_carte(char *av1, t_jeu *jeu);
-void    nombredeligne(char *av1, t_jeu *jeu);
+int 	create_map(char *av1, t_jeu *jeu);
+void    nbr_of_line(char *av1, t_jeu *jeu);
 int 	mur_haut_bas(t_jeu *jeu);
 int     contenu_ligne(t_jeu *jeu);
 int 	check_letter(t_jeu *jeu);
 
 int 	error_letter(t_jeu *jeu);
 int     check_valid_name(char *av1);
-int    libere_carte(char **carte);
+int    free_map(char **carte);
 int     check_map(t_jeu *jeu);
+void    free_all(t_jeu *jeu);
 
 int    flood_fill(int x, int y, t_jeu *jeu);
 char    **copy_map(char **map);
 char	*copy(const char *src);
 int 	check_flood(t_jeu *jeu);
+int     check_empty(t_jeu *jeu);
+
+
+
+
+//mlx 
+
+void    xpm_to_img(t_mlx *mlx);
+void	img_to_window(t_mlx *mlx, t_jeu *jeu);
+int     disconnect(t_mlx *mlx);
+int	    move(int keysym, t_mlx *mlx, t_jeu *jeu);
+void	go_right(t_mlx *mlx, t_jeu *jeu);
+int     count_move(int keysym);
 
 
 #endif
