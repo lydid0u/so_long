@@ -153,7 +153,7 @@ int	contenu_ligne(t_jeu *jeu)
 			}
 			else if (jeu->map_p[i][j] != '0' && jeu->map_p[i][j] != '1'
 					&& jeu->map_p[i][j] != 'C' && jeu->map_p[i][j] != 'P'
-					&& jeu->map_p[i][j] != 'E')
+					&& jeu->map_p[i][j] != 'E' && jeu->map_p[i][j] != 'D')
 			{
 				ft_printf("Error\nIncompatible character!\n");
 				return (0);

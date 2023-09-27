@@ -20,6 +20,8 @@ int	error_letter(t_jeu *jeu)
 		return (ft_printf("Error\nYou need 1 exit !\n"), 0);
 	if (jeu->coin < 1)
 		return (ft_printf("Error\nYou need at least 1 coin !\n"), 0);
+	if (jeu->nmi < 1)
+		return (ft_printf("Error\nYou need at least 1 ennemi patrol !\n"), 0);
 	if (jeu->nbr_ligne >= jeu->len)
 		return (ft_printf("Error\nThe map has to be rectangle !\n"), 0);
 	return (1);

@@ -12,27 +12,6 @@
 
 #include "../so_long.h"
 
-// int	destroy(t_jeu *jeu)
-// {
-// 	mlx_destroy_window(jeu->mlx_ptr, jeu->win_ptr);
-// 	mlx_destroy_display(jeu->mlx_ptr);
-// 	free(jeu->mlx_ptr);
-// 	exit(0);
-// 	return (0);
-// }
-
-int i = 0;
-
-int	count_move(int keysym) // keysym = nom de touche
-{
-	if (keysym == 65361 || keysym == 65363 || keysym == 65364 || keysym == 65362 || keysym == 97 || keysym == 119 || keysym == 115 || keysym == 100)
-	{
-		i++;
-		ft_printf("Move : %d %d\n", i, keysym);
-	}
-	return (0);
-}
-
 void	xpm_to_img(t_jeu *jeu)
 {
 	static int	width;
@@ -40,7 +19,7 @@ void	xpm_to_img(t_jeu *jeu)
 
 	width = 64;
 	height = 64;
-	jeu->img_coin = mlx_xpm_file_to_image(jeu->mlx_ptr, "viande.xpm", &width,
+	jeu->img_coin = mlx_xpm_file_to_image(jeu->mlx_ptr, "tea.xpm", &width,
 			&height);
 	jeu->img_wall = mlx_xpm_file_to_image(jeu->mlx_ptr, "arbre.xpm", &width,
 			&height);
@@ -49,6 +28,8 @@ void	xpm_to_img(t_jeu *jeu)
 	jeu->img_floor = mlx_xpm_file_to_image(jeu->mlx_ptr, "floor.xpm", &width,
 			&height);
 	jeu->img_perso = mlx_xpm_file_to_image(jeu->mlx_ptr, "perso.xpm", &width,
+			&height);
+	jeu->img_nmi = mlx_xpm_file_to_image(jeu->mlx_ptr, "don.xpm", &width,
 			&height);
 }
 
@@ -78,6 +59,9 @@ void	img_to_window(t_jeu *jeu)
 			if (jeu->map_p[i][j] == 'P')
 				mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_perso,
 					j * 64, i * 64);
+			if (jeu->map_p[i][j] == 'D')
+				mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_nmi,
+					j * 64, i * 64);
 			j++;
 		}
 		i++;
@@ -91,6 +75,7 @@ int    disconnect(t_jeu *jeu)
     mlx_destroy_image(jeu->mlx_ptr, jeu->img_exit);
     mlx_destroy_image(jeu->mlx_ptr, jeu->img_perso);
     mlx_destroy_image(jeu->mlx_ptr, jeu->img_coin);
+	mlx_destroy_image(jeu->mlx_ptr, jeu->img_nmi);
     mlx_destroy_window(jeu->mlx_ptr, jeu->win_ptr);
     mlx_destroy_display(jeu->mlx_ptr);
 	free(jeu->mlx_ptr);
@@ -106,18 +91,14 @@ int	ft_move(int keysym, t_jeu *jeu)
 		exit(EXIT_SUCCESS);
 	}
 	if (keysym == 65363 || keysym == 100)
-	{
 		go_right(jeu);
-	}
 	if (keysym == 65361 || keysym == 97)
 		go_left(jeu);
 	if (keysym == 65362 || keysym == 119)
 		go_up(jeu);
 	if (keysym == 65364 || keysym == 115)
 		go_down(jeu);
-	printf("%d\n", jeu->coin);	
 	ft_printf("number of steps : %d\n", jeu->steps);
-
 	return (0);
 }
 
@@ -133,9 +114,10 @@ int	ft_move(int keysym, t_jeu *jeu)
 
 void	go_right(t_jeu *jeu)
 {
-	jeu->steps++;
-	if (jeu->map_p[jeu->x][jeu->y + 1] == 'E' && jeu->coin == 0)
+	if ((jeu->map_p[jeu->x][jeu->y + 1] == 'E' && jeu->coin == 0) || jeu->map_p[jeu->x][jeu->y + 1] == 'D')
 	{
+		if(jeu->map_p[jeu->x][jeu->y + 1] == 'D')
+			ft_printf("Don Paolo ruined your tea party :(\n");
 		free_all(jeu);
 		disconnect(jeu);
 		exit(EXIT_SUCCESS);
@@ -148,6 +130,7 @@ void	go_right(t_jeu *jeu)
 		jeu->coin--;
 		jeu->map_p[jeu->x][jeu->y + 1] = '0';
 	}
+	jeu->steps++;
 	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor, jeu->y * 64, jeu->x * 64);
 	jeu->y = jeu->y + 1;
 	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_perso, jeu->y * 64, jeu->x * 64);
@@ -155,9 +138,10 @@ void	go_right(t_jeu *jeu)
 
 void	go_left(t_jeu *jeu)
 {
-	jeu->steps++;
-	if (jeu->map_p[jeu->x][jeu->y - 1] == 'E' && jeu->coin == 0)
+	if ((jeu->map_p[jeu->x][jeu->y - 1] == 'E' && jeu->coin == 0) || jeu->map_p[jeu->x][jeu->y - 1] == 'D')
 	{
+		if(jeu->map_p[jeu->x][jeu->y - 1] == 'D')
+			ft_printf("Don Paolo ruined your tea party :(\n");
 		free_all(jeu);
 		disconnect(jeu);
 		exit(EXIT_SUCCESS);
@@ -169,6 +153,7 @@ void	go_left(t_jeu *jeu)
 		jeu->coin--;
 		jeu->map_p[jeu->x][jeu->y - 1] = '0';
 	}
+	jeu->steps++;
 	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor, jeu->y * 64, jeu->x * 64);
 	jeu->y = jeu->y - 1;
 	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_perso, jeu->y * 64, jeu->x * 64);
@@ -176,9 +161,10 @@ void	go_left(t_jeu *jeu)
 
 void	go_up(t_jeu *jeu)
 {
-	jeu->steps++;
-	if (jeu->map_p[jeu->x - 1][jeu->y] == 'E' && jeu->coin == 0)
+	if ((jeu->map_p[jeu->x - 1][jeu->y] == 'E' && jeu->coin == 0) || jeu->map_p[jeu->x - 1][jeu->y] == 'D')
 	{
+		if(jeu->map_p[jeu->x - 1][jeu->y] == 'D')
+			ft_printf("Don Paolo ruined your tea party :(\n");
 		free_all(jeu);
 		disconnect(jeu);
 		exit(EXIT_SUCCESS);
@@ -190,6 +176,7 @@ void	go_up(t_jeu *jeu)
 		jeu->coin--;
 		jeu->map_p[jeu->x - 1][jeu->y] = '0';
 	}
+	jeu->steps++;
 	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor, jeu->y * 64, jeu->x * 64);
 	jeu->x = jeu->x - 1;
 	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_perso, jeu->y * 64, jeu->x * 64);
@@ -197,9 +184,10 @@ void	go_up(t_jeu *jeu)
 
 void	go_down(t_jeu *jeu)
 {
-	jeu->steps++;
-	if (jeu->map_p[jeu->x + 1][jeu->y] == 'E' && jeu->coin == 0)
+	if ((jeu->map_p[jeu->x + 1][jeu->y] == 'E' && jeu->coin == 0) || jeu->map_p[jeu->x + 1][jeu->y] == 'D')
 	{
+		if(jeu->map_p[jeu->x + 1][jeu->y] == 'D')
+			ft_printf("Don Paolo ruined your tea party :(\n");
 		free_all(jeu);
 		disconnect(jeu);
 		exit(EXIT_SUCCESS);
@@ -211,6 +199,7 @@ void	go_down(t_jeu *jeu)
 		jeu->coin--;
 		jeu->map_p[jeu->x + 1][jeu->y] = '0';
 	}
+	jeu->steps++;
 	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor, jeu->y * 64, jeu->x * 64);
 	jeu->x = jeu->x + 1;
 	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_perso, jeu->y * 64, jeu->x * 64);
@@ -245,13 +234,11 @@ int	main(int argc, char **argv)
 		jeu.mlx_ptr = mlx_init();
 		if (!jeu.mlx_ptr)
 			return (1);
-		jeu.win_ptr = mlx_new_window(jeu.mlx_ptr, jeu.len * 64, jeu.nbr_ligne * 64, "mugiwara :D");
+		jeu.win_ptr = mlx_new_window(jeu.mlx_ptr, jeu.len * 64, jeu.nbr_ligne * 64, "Tea party <3");
 		if (!jeu.win_ptr)
 			return (free(jeu.mlx_ptr), 1);
 		xpm_to_img(&jeu);
 		img_to_window(&jeu);
-		
-		mlx_hook(jeu.win_ptr, KeyRelease, KeyReleaseMask, &count_move, &jeu);
 		
 		mlx_key_hook(jeu.win_ptr, &ft_move, &jeu);
 		printf("DASDSA AS %d\n", jeu.y);

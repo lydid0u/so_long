@@ -31,6 +31,7 @@ typedef struct s_jeu
 	int		perso;
 	int		exit;
 	int		len;
+	int		nmi;
 	char	**map_f;
 	char	**map_p;
     void	*mlx_ptr;
@@ -40,6 +41,7 @@ typedef struct s_jeu
 	void	*img_exit;
 	void	*img_wall;
 	void	*img_floor;
+	void	*img_nmi;
 	int		steps;
 	int		x;
 	int		y;

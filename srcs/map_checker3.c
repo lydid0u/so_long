@@ -27,6 +27,8 @@ int	check_letter(t_jeu *jeu)
 				jeu->coin++;
 			else if (jeu->map_p[i][j] == 'P')
 				jeu->perso++;
+			else if (jeu->map_p[i][j] == 'D')
+				jeu->nmi++;
 			else if (jeu->map_p[i][j] == 'E')
 				jeu->exit++;
 			j++;
