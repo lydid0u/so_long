@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:45:46 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/09/24 18:50:29 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/09/27 14:52:26 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ int	contenu_ligne(t_jeu *jeu)
 			{
 				jeu->x = i;
 				jeu->y = j;
+				printf("apres : %d %d \n", jeu->x, jeu->y);
 			}
 			j++;
 		}

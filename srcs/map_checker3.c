@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:05:12 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/09/24 16:30:34 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:11:15 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_letter(t_jeu *jeu)
 		while (jeu->map_p[i][j])
 		{
 			if (jeu->map_p[i][j] == 'C')
-				jeu->collectible++;
+				jeu->coin++;
 			else if (jeu->map_p[i][j] == 'P')
 				jeu->perso++;
 			else if (jeu->map_p[i][j] == 'E')

@@ -6,17 +6,17 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:23:24 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/09/25 21:11:20 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:16:42 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-// int	destroy(t_mlx *mlx)
+// int	destroy(t_jeu *jeu)
 // {
-// 	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-// 	mlx_destroy_display(mlx->mlx_ptr);
-// 	free(mlx->mlx_ptr);
+// 	mlx_destroy_window(jeu->mlx_ptr, jeu->win_ptr);
+// 	mlx_destroy_display(jeu->mlx_ptr);
+// 	free(jeu->mlx_ptr);
 // 	exit(0);
 // 	return (0);
 // }
@@ -33,26 +33,26 @@ int	count_move(int keysym) // keysym = nom de touche
 	return (0);
 }
 
-void	xpm_to_img(t_mlx *mlx)
+void	xpm_to_img(t_jeu *jeu)
 {
-	int	width;
-	int	height;
+	static int	width;
+	static int	height;
 
 	width = 64;
 	height = 64;
-	mlx->coin = mlx_xpm_file_to_image(mlx->mlx_ptr, "viande.xpm", &width,
+	jeu->img_coin = mlx_xpm_file_to_image(jeu->mlx_ptr, "viande.xpm", &width,
 			&height);
-	mlx->wall = mlx_xpm_file_to_image(mlx->mlx_ptr, "arbre.xpm", &width,
+	jeu->img_wall = mlx_xpm_file_to_image(jeu->mlx_ptr, "arbre.xpm", &width,
 			&height);
-	mlx->exit = mlx_xpm_file_to_image(mlx->mlx_ptr, "door.xpm", &width,
+	jeu->img_exit = mlx_xpm_file_to_image(jeu->mlx_ptr, "door.xpm", &width,
 			&height);
-	mlx->floor = mlx_xpm_file_to_image(mlx->mlx_ptr, "floor.xpm", &width,
+	jeu->img_floor = mlx_xpm_file_to_image(jeu->mlx_ptr, "floor.xpm", &width,
 			&height);
-	mlx->perso = mlx_xpm_file_to_image(mlx->mlx_ptr, "perso.xpm", &width,
+	jeu->img_perso = mlx_xpm_file_to_image(jeu->mlx_ptr, "perso.xpm", &width,
 			&height);
 }
 
-void	img_to_window(t_mlx *mlx, t_jeu *jeu)
+void	img_to_window(t_jeu *jeu)
 {
 	int	i;
 	int	j;
@@ -64,57 +64,60 @@ void	img_to_window(t_mlx *mlx, t_jeu *jeu)
 		while (jeu->map_p[i][j])
 		{
 			if (jeu->map_p[i][j] == 'C')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->coin, j
+				mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_coin, j
 					* 64, i * 64);
 			if (jeu->map_p[i][j] == '1')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->wall, j
+				mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_wall, j
 					* 64, i * 64);
 			if (jeu->map_p[i][j] == 'E')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->exit, j
+				mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_exit, j
 					* 64, i * 64);
 			if (jeu->map_p[i][j] == '0')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->floor,
+				mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor,
 					j * 64, i * 64);
 			if (jeu->map_p[i][j] == 'P')
-			{
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->perso,
+				mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_perso,
 					j * 64, i * 64);
-				mlx->i = i;
-				mlx->j = j;
-			}
 			j++;
 		}
 		i++;
 	}
 }
 
-int    disconnect(t_mlx *mlx)
+int    disconnect(t_jeu *jeu)
 {
-    mlx_destroy_image(mlx->mlx_ptr, mlx->wall);
-    mlx_destroy_image(mlx->mlx_ptr, mlx->floor);
-    mlx_destroy_image(mlx->mlx_ptr, mlx->exit);
-    mlx_destroy_image(mlx->mlx_ptr, mlx->perso);
-    mlx_destroy_image(mlx->mlx_ptr, mlx->coin);
-    mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-    mlx_destroy_display(mlx->mlx_ptr);
+    mlx_destroy_image(jeu->mlx_ptr, jeu->img_wall);
+    mlx_destroy_image(jeu->mlx_ptr, jeu->img_floor);
+    mlx_destroy_image(jeu->mlx_ptr, jeu->img_exit);
+    mlx_destroy_image(jeu->mlx_ptr, jeu->img_perso);
+    mlx_destroy_image(jeu->mlx_ptr, jeu->img_coin);
+    mlx_destroy_window(jeu->mlx_ptr, jeu->win_ptr);
+    mlx_destroy_display(jeu->mlx_ptr);
+	free(jeu->mlx_ptr);
     exit(0);
 }
 
-int	move(int keysym, t_mlx *mlx, t_jeu *jeu)
+int	ft_move(int keysym, t_jeu *jeu)
 {
 	if (keysym == 65307)
-		disconnect(mlx);
+	{
+		free_all(jeu);
+		disconnect(jeu);
+		exit(EXIT_SUCCESS);
+	}
 	if (keysym == 65363 || keysym == 100)
 	{
-
-		go_right(mlx, jeu);
+		go_right(jeu);
 	}
-	// if (keysym == 65361 || keysym == 97)
-	// 	go_left;
-	// if (keysym == 65362 || keysym == 119)
-	// 	go_up
-	// if (keysym == 65362 || keysym == 115)
-	// 	go_down
+	if (keysym == 65361 || keysym == 97)
+		go_left(jeu);
+	if (keysym == 65362 || keysym == 119)
+		go_up(jeu);
+	if (keysym == 65364 || keysym == 115)
+		go_down(jeu);
+	printf("%d\n", jeu->coin);	
+	ft_printf("number of steps : %d\n", jeu->steps);
+
 	return (0);
 }
 
@@ -128,18 +131,100 @@ int	move(int keysym, t_mlx *mlx, t_jeu *jeu)
 // d : 100
 // w : 119
 
-void	go_right(t_mlx *mlx, t_jeu *jeu)
+void	go_right(t_jeu *jeu)
 {
-	(void) jeu;
-	printf("%d %d ", mlx->i, mlx->j);
+	jeu->steps++;
+	if (jeu->map_p[jeu->x][jeu->y + 1] == 'E' && jeu->coin == 0)
+	{
+		free_all(jeu);
+		disconnect(jeu);
+		exit(EXIT_SUCCESS);
+	}
+	printf("go right :%d %d \n", jeu->x, jeu->y);
+	if (jeu->map_p[jeu->x][jeu->y + 1] == '1' || jeu->map_p[jeu->x][jeu->y + 1] == 'E')
+		return ;
+	if (jeu->map_p[jeu->x][jeu->y + 1] == 'C')
+	{
+		jeu->coin--;
+		jeu->map_p[jeu->x][jeu->y + 1] = '0';
+	}
+	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor, jeu->y * 64, jeu->x * 64);
+	jeu->y = jeu->y + 1;
+	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_perso, jeu->y * 64, jeu->x * 64);
+}
 
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->perso, mlx->i + 64 , mlx->j);
-	mlx->i = mlx->i * 64;
+void	go_left(t_jeu *jeu)
+{
+	jeu->steps++;
+	if (jeu->map_p[jeu->x][jeu->y - 1] == 'E' && jeu->coin == 0)
+	{
+		free_all(jeu);
+		disconnect(jeu);
+		exit(EXIT_SUCCESS);
+	}
+	if (jeu->map_p[jeu->x][jeu->y - 1] == '1' || jeu->map_p[jeu->x][jeu->y - 1] == 'E')
+		return ;
+	if (jeu->map_p[jeu->x][jeu->y - 1] == 'C')
+	{
+		jeu->coin--;
+		jeu->map_p[jeu->x][jeu->y - 1] = '0';
+	}
+	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor, jeu->y * 64, jeu->x * 64);
+	jeu->y = jeu->y - 1;
+	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_perso, jeu->y * 64, jeu->x * 64);
+}
+
+void	go_up(t_jeu *jeu)
+{
+	jeu->steps++;
+	if (jeu->map_p[jeu->x - 1][jeu->y] == 'E' && jeu->coin == 0)
+	{
+		free_all(jeu);
+		disconnect(jeu);
+		exit(EXIT_SUCCESS);
+	}
+	if (jeu->map_p[jeu->x - 1][jeu->y] == '1' || jeu->map_p[jeu->x - 1][jeu->y] == 'E')
+		return ;
+	if (jeu->map_p[jeu->x - 1][jeu->y] == 'C')
+	{
+		jeu->coin--;
+		jeu->map_p[jeu->x - 1][jeu->y] = '0';
+	}
+	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor, jeu->y * 64, jeu->x * 64);
+	jeu->x = jeu->x - 1;
+	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_perso, jeu->y * 64, jeu->x * 64);
+}
+
+void	go_down(t_jeu *jeu)
+{
+	jeu->steps++;
+	if (jeu->map_p[jeu->x + 1][jeu->y] == 'E' && jeu->coin == 0)
+	{
+		free_all(jeu);
+		disconnect(jeu);
+		exit(EXIT_SUCCESS);
+	}
+	if (jeu->map_p[jeu->x + 1][jeu->y] == '1' || jeu->map_p[jeu->x + 1][jeu->y] == 'E')
+		return ;
+	if (jeu->map_p[jeu->x + 1][jeu->y] == 'C')
+	{
+		jeu->coin--;
+		jeu->map_p[jeu->x + 1][jeu->y] = '0';
+	}
+	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor, jeu->y * 64, jeu->x * 64);
+	jeu->x = jeu->x + 1;
+	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_perso, jeu->y * 64, jeu->x * 64);
+}
+
+int	exit_and_leave(t_jeu *jeu)
+{
+		free_all(jeu);
+		disconnect(jeu);
+		exit(EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv)
 {
-	static t_mlx	mlx = {0};
 	static t_jeu	jeu = {0};
 
 	if (argc == 2)
@@ -157,23 +242,22 @@ int	main(int argc, char **argv)
 		flood_fill(jeu.x, jeu.y, &jeu);
 		if (!(check_flood(&jeu)))
 			return (0);
-		free_map(jeu.map);
-		free_map(jeu.map_f);
-		mlx.mlx_ptr = mlx_init();
-		if (!mlx.mlx_ptr)
+		jeu.mlx_ptr = mlx_init();
+		if (!jeu.mlx_ptr)
 			return (1);
-		mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, jeu.len * 64, jeu.nbr_ligne * 64, "mugiwara :()");
-		if (!mlx.win_ptr)
-			return (free(mlx.mlx_ptr), 1);
-	
-		xpm_to_img(&mlx);
-		img_to_window(&mlx, &jeu);
-		mlx.j = mlx.j * 64;
-		mlx_hook(mlx.win_ptr, KeyRelease, KeyReleaseMask, &count_move, &mlx);
+		jeu.win_ptr = mlx_new_window(jeu.mlx_ptr, jeu.len * 64, jeu.nbr_ligne * 64, "mugiwara :D");
+		if (!jeu.win_ptr)
+			return (free(jeu.mlx_ptr), 1);
+		xpm_to_img(&jeu);
+		img_to_window(&jeu);
 		
-		mlx_key_hook(mlx.win_ptr, &move, &mlx);
-		mlx_hook(mlx.win_ptr, DestroyNotify, StructureNotifyMask, &disconnect, &mlx);			
-		mlx_loop(mlx.mlx_ptr);
+		mlx_hook(jeu.win_ptr, KeyRelease, KeyReleaseMask, &count_move, &jeu);
+		
+		mlx_key_hook(jeu.win_ptr, &ft_move, &jeu);
+		printf("DASDSA AS %d\n", jeu.y);
+		mlx_hook(jeu.win_ptr, DestroyNotify, StructureNotifyMask, &exit_and_leave, &jeu);
+				
+		mlx_loop(jeu.mlx_ptr);
 		return (0);
 	}
 }

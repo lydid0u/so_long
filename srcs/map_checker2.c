@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:45:55 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/09/24 16:40:40 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:11:15 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	error_letter(t_jeu *jeu)
 		return (ft_printf("Error\nYou need 1 player !\n"), 0);
 	if (jeu->exit != 1)
 		return (ft_printf("Error\nYou need 1 exit !\n"), 0);
-	if (jeu->collectible < 1)
-		return (ft_printf("Error\nYou need at least 1 collectible !\n"), 0);
+	if (jeu->coin < 1)
+		return (ft_printf("Error\nYou need at least 1 coin !\n"), 0);
 	if (jeu->nbr_ligne >= jeu->len)
 		return (ft_printf("Error\nThe map has to be rectangle !\n"), 0);
 	return (1);
