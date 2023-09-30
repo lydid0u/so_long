@@ -162,7 +162,6 @@ int	contenu_ligne(t_jeu *jeu)
 			{
 				jeu->x = i;
 				jeu->y = j;
-				printf("apres : %d %d \n", jeu->x, jeu->y);
 			}
 			j++;
 		}

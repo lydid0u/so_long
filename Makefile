@@ -10,7 +10,7 @@ PRINTF        = ft_printf
 
 FT_PRINTF    = ft_printf/libftprintf.a
 
-SRC     = ./srcs/map_checker.c ./srcs/map_checker2.c ./srcs/map_checker3.c ./srcs/flood_fill.c main.c ./code_mlx/new_windows.c ./GNL/get_next_line.c ./GNL/get_next_line_utils.c
+SRC     = so_long.c ./parsing/map_checker.c ./parsing/map_checker2.c ./parsing/map_checker3.c ./parsing/flood_fill.c ./code_mlx/new_windows.c ./code_mlx/movement.c ./GNL/get_next_line.c ./GNL/get_next_line_utils.c
 
 OBJ    = ${SRC:.c=.o}
 

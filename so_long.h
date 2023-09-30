@@ -37,14 +37,22 @@ typedef struct s_jeu
     void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_perso;
+	void	*img_right;
+	void	*img_left;
 	void	*img_coin;
 	void	*img_exit;
 	void	*img_wall;
 	void	*img_floor;
 	void	*img_nmi;
+	void	*end;
+	void	*end_two;
+	void	*pied;
 	int		steps;
+	char	*win_steps;
 	int		x;
 	int		y;
+		int		hauteur;
+	int		largeur;
 }			t_jeu;
 
 
@@ -78,5 +86,8 @@ void	    go_up(t_jeu *jeu);
 void	    go_left(t_jeu *jeu);
 int			count_move(int keysym);
 int	exit_and_leave(t_jeu *jeu);
+void	print_moves(t_jeu *jeu);
+void moveEnemies(t_jeu *jeu);
+int	end_frame(int keysym, t_jeu *jeu);
 
 #endif
