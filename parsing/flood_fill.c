@@ -6,59 +6,11 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:16:08 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/09/27 13:54:19 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:42:02 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-char	*copy(const char *src)
-{
-	char	*new;
-	int		i;
-	int		size;
-
-	size = 0;
-	while (src[size])
-		size++;
-	if (!(new = malloc(sizeof(char) * (size + 1))))
-		return (NULL);
-	i = 0;
-	while (src[i] && src[i] != '\n')
-	{
-		new[i] = src[i];
-		i++;
-	}
-	new[i] = '\0';
-	return (new);
-}
-
-char	**copy_map(char **map)
-{
-	char	**dst;
-	int		i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	dst = (char **)malloc(sizeof(char *) * (i + 1));
-	if (!dst)
-		return (NULL);
-	i = 0;
-	while (map[i])
-	{
-		dst[i] = copy(map[i]);
-		if (dst[i] == NULL)
-		{
-			while (i >= 0)
-				free(dst[i--]);
-			return (NULL);
-		}
-		i++;
-	}
-	dst[i] = NULL;
-	return (dst);
-}
 
 int	flood_fill(int x, int y, t_jeu *jeu)
 {
@@ -71,13 +23,25 @@ int	flood_fill(int x, int y, t_jeu *jeu)
 	return (0);
 }
 
-int	check_flood(t_jeu *jeu)
+int	flood_fill_stuck(int x, int y, t_jeu *jeu)
 {
-	int	i;
+	if (jeu->map_f[x][y] == '1' || jeu->map_f[x][y] == 'V' ||
+		jeu->map_f[x][y] == 'E' || jeu->map_f[x][y] == 'D')
+		return (0);
+	if (jeu->map_f[x][y] == 'C')
+		return (1);
+	jeu->map_f[x][y] = 'S';
+	if (flood_fill_stuck(x - 1, y, jeu) || flood_fill_stuck(x + 1, y, jeu)
+		|| flood_fill_stuck(x, y - 1, jeu) || flood_fill_stuck(x, y + 1, jeu))
+		return (1);
+	return (0);
+}
+
+int	check_flood(t_jeu *jeu, int i)
+{
 	int	j;
 	int	len;
 
-	i = 0;
 	len = ft_strlen(jeu->map_f[i]);
 	while (jeu->map_f[i] && i < jeu->nbr_ligne)
 	{
@@ -97,6 +61,34 @@ int	check_flood(t_jeu *jeu)
 			j++;
 		}
 		i++;
+	}
+	return (1);
+}
+
+int	flood(t_jeu *jeu)
+{
+	int	i;
+
+	i = 0;
+	flood_fill(jeu->x, jeu->y, jeu);
+	if (!(check_flood(jeu, 0)))
+		return (0);
+	while (jeu->map_f[i])
+	{
+		printf("test : %s\n", jeu->map_f[i]);
+		i++;
+	}
+	i = 0;
+	if (!flood_fill_stuck(jeu->x, jeu->y, jeu))
+	{
+		while (jeu->map_f[i])
+		{
+			printf("%s\n", jeu->map_f[i]);
+			i++;
+		}
+		free_all(jeu);
+		ft_printf("Error\nA collectible is innacessible !");
+		return (0);
 	}
 	return (1);
 }

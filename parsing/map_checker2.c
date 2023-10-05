@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:45:55 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/09/27 15:11:15 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:39:52 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	error_letter(t_jeu *jeu)
 		return (ft_printf("Error\nYou need at least 1 ennemi patrol !\n"), 0);
 	if (jeu->nbr_ligne >= jeu->len)
 		return (ft_printf("Error\nThe map has to be rectangle !\n"), 0);
+	if (jeu->len > 31)
+		return (ft_printf("Error\nLine is too long !"), 0);
 	return (1);
 }
 
@@ -106,7 +108,7 @@ int	check_map(t_jeu *jeu)
 		free_map(jeu->map_p);
 		return (0);
 	}
-	if (!(contenu_ligne(jeu)))
+	if (!(contenu_ligne(jeu, 1)))
 	{
 		free_map(jeu->map);
 		free_map(jeu->map_p);

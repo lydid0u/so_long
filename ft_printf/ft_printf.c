@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adzinabi <adzinabi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/12 12:23:53 by adzinabi          #+#    #+#             */
-/*   Updated: 2023/05/12 12:23:53 by adzinabi         ###   ########.fr       */
+/*   Created: 2023/05/12 12:23:53 by lboudjel          #+#    #+#             */
+/*   Updated: 2023/05/12 12:23:53 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 #include <stdio.h>
 #include <unistd.h>
