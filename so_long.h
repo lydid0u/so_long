@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:04:50 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/03 19:02:57 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:17:11 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_jeu
 	int		nmi;
 	char	**map_f;
 	char	**map_p;
+	char	**map_fd;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_perso;
@@ -104,6 +105,7 @@ void		print_img(t_jeu *jeu, int i, int j);
 void		loop_hook(t_jeu *jeu);
 int			flood_fill_stuck(int x, int y, t_jeu *jeu);
 int			flood(t_jeu *jeu);
+int	check_flood_nmi(t_jeu *jeu, int i);
 
 // void	anim_nmi(t_jeu *jeu, int i, int j);
 

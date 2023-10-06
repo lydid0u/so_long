@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:58:21 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/03 18:49:29 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:16:53 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@ int	main(int argc, char **argv)
 		if (!(check_map(&jeu)))
 			return (0);
 		jeu.map_f = copy_map(jeu.map);
+		jeu.map_fd = copy_map(jeu.map);
 		// if (!flood(&jeu))
 		// 	return (0);
 		flood_fill(jeu.x, jeu.y, &jeu);
 		if (!(check_flood(&jeu, 0)))
+			return (0);
+		flood_fill_stuck(jeu.x, jeu.y, &jeu);
+		if (!(check_flood_nmi(&jeu, 0)))
 			return (0);
 		// if (!flood_fill_stuck(jeu.x, jeu.y, &jeu))
 		// {

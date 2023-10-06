@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:05:12 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/06 12:21:05 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:11:15 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,4 @@ void	free_all(t_jeu *jeu)
 	free_map(jeu->map);
 	free_map(jeu->map_p);
 	free_map(jeu->map_f);
-	free_map(jeu->map_fd);	
 }
