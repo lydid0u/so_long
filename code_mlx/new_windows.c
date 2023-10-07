@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:23:24 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/07 12:32:35 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/03 19:03:28 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ int	xpm_to_img(t_jeu *jeu)
 			&jeu->width, &jeu->height);
 		if(!jeu->img_nmi)
 			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	jeu->img_plant = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/plant2.xpm",
+			&jeu->width, &jeu->height);
+		if(!jeu->img_plant)
+			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	jeu->img_lamp = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/lamp.xpm",
+			&jeu->width, &jeu->height);
+		if(!jeu->img_lamp)
+			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
 	jeu->pied = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/doubl.xpm",
 			&jeu->width, &jeu->height);
 		if(!jeu->pied)
@@ -76,8 +84,14 @@ void	print_img(t_jeu *jeu, int i, int j)
 		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_coin, j
 			* 64, i * 64);
 	if (jeu->map_p[i][j] == '1')
-		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_wall, j
-			* 64, i * 64);
+	{
+		// if (j % 3 == 0)
+			mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_wall, j
+				* 64, i * 64);
+		// // else 
+		// 	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_plant, j
+		// 		* 64, i * 64);
+	}
 	if (jeu->map_p[i][j] == 'E')
 		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_exit, j
 			* 64, i * 64);

@@ -45,6 +45,8 @@ typedef struct s_jeu
 	void	*img_wall;
 	void	*img_floor;
 	void	*img_nmi;
+	void	*img_lamp;
+	void	*img_plant;
 	void	*anim_tea;
 	void	*end;
 	void	*end_two;
@@ -52,6 +54,7 @@ typedef struct s_jeu
 	int		steps;
 	char	*win_steps;
 	int		bonus_tea;
+	int		watah;
 	int		bonus_nmi;
 	int		x;
 	int		y;
@@ -107,7 +110,14 @@ int			flood_fill_stuck(int x, int y, t_jeu *jeu);
 int			flood(t_jeu *jeu);
 int			check_flood_nmi(t_jeu *jeu, int i);
 int			animation_loop(t_jeu *jeu);
+void	anim_watah(t_jeu *jeu, int i, int j);
+void	anim_nmi(t_jeu *jeu, int i, int j);
+void		ft_reset_watah(t_jeu *jeu);
+void		ft_reset_nmi(t_jeu *jeu);
+int			animation_loop_watah(t_jeu *jeu);
+int			animation_loop_nmi(t_jeu *jeu);
+void	don_left(t_jeu *jeu, int i, int j);
+void	don_right(t_jeu *jeu, int i, int j);
 
-// void	anim_nmi(t_jeu *jeu, int i, int j);
 
 #endif

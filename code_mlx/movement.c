@@ -28,7 +28,8 @@ int	ft_move(int keysym, t_jeu *jeu)
 		go_up(jeu);
 	if (keysym == 65364 || keysym == 115)
 		go_down(jeu);
-	mlx_loop_hook(jeu->mlx_ptr, animation_loop, jeu);
+	// mlx_loop_hook(jeu->mlx_ptr, animation_loop, jeu);
+	mlx_loop_hook(jeu->mlx_ptr, animation_loop_nmi, jeu);
 	return (0);
 }
 
