@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:33:35 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/03 16:02:05 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/07 12:16:53 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	disconnect(t_jeu *jeu)
 	mlx_destroy_image(jeu->mlx_ptr, jeu->img_coin);
 	mlx_destroy_image(jeu->mlx_ptr, jeu->img_nmi);
 	mlx_destroy_image(jeu->mlx_ptr, jeu->pied);
+	mlx_loop_end(jeu->mlx_ptr);
 	mlx_destroy_window(jeu->mlx_ptr, jeu->win_ptr);
 	mlx_destroy_display(jeu->mlx_ptr);
 	free(jeu->mlx_ptr);

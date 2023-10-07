@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 15:16:08 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/06 12:19:05 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/07 12:04:18 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	flood_fill(int x, int y, t_jeu *jeu)
 
 int	flood_fill_stuck(int x, int y, t_jeu *jeu)
 {
-	if (jeu->map_fd[x][y] == '1' || jeu->map_fd[x][y] == 'V' ||
+	if (jeu->map_fd[x][y] == '1' || jeu->map_fd[x][y] == 'S' ||
 		jeu->map_fd[x][y] == 'E' || jeu->map_fd[x][y] == 'D')
 		return (0);
 	if (jeu->map_fd[x][y] == 'C')
@@ -69,19 +69,25 @@ int	check_flood_nmi(t_jeu *jeu, int i)
 {
 	int	j;
 	int	len;
+	int s = 0;
 
 	len = ft_strlen(jeu->map_fd[i]);
 	while (jeu->map_fd[i] && i < jeu->nbr_ligne)
 	{
+			while (jeu->map_fd[s])
+	{
+		printf("test : %s\n", jeu->map_fd[s]);
+		s++;
+	}
 		j = 0;
 		while (jeu->map_fd[i][j] && j < len - 1)
 		{
-			if (jeu->map_fd[i][0] != '1' || jeu->map_fd[i][len - 1] != '1')
-			{
-				free_all(jeu);
-				return (ft_printf("Error\nSomething is innacessible !\n"), 0);
-			}
-			else if (jeu->map_fd[i][j] != 'V' && jeu->map_fd[i][j] != '1')
+			// if (jeu->map_fd[i][0] != '1' || jeu->map_fd[i][len - 1] != '1')
+			// {
+			// 	free_all(jeu);
+			// 	return (ft_printf("Error\nSomething is innacessible !\n"), 0);
+			// }
+			if (jeu->map_fd[i][j] != 'S' && jeu->map_fd[i][j] != '1' && jeu->map_fd[i][j] == 'C')
 			{
 				free_all(jeu);
 				return (ft_printf("Error\nSomething is innacessible !\n"), 0);

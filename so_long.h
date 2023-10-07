@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:04:50 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/06 12:17:11 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/07 12:12:18 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void		print_img(t_jeu *jeu, int i, int j);
 void		loop_hook(t_jeu *jeu);
 int			flood_fill_stuck(int x, int y, t_jeu *jeu);
 int			flood(t_jeu *jeu);
-int	check_flood_nmi(t_jeu *jeu, int i);
+int			check_flood_nmi(t_jeu *jeu, int i);
+int			animation_loop(t_jeu *jeu);
 
 // void	anim_nmi(t_jeu *jeu, int i, int j);
 
