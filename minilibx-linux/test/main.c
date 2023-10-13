@@ -11,9 +11,9 @@
 
 void	*mlx;
 void	*win1;
-void    *win2;
-void    *win3;
-void    *im1;
+void	*win2;
+void	*win3;
+void	*im1;
 void	*im2;
 void	*im3;
 void	*im4;
@@ -56,21 +56,21 @@ int	key_win1(int key,void *p)
 {
   printf("Key in Win1 : %d\n",key);
   if (key==0xFF1B)
-    exit(0);
+	exit(0);
 }
 
 int	key_win2(int key,void *p)
 {
   printf("Key in Win2 : %d\n",key);
   if (key==0xFF1B)
-    exit(0);
+	exit(0);
 }
 
 int	key_win3(int key,void *p)
 {
   printf("Key in Win3 : %d\n",key);
   if (key==0xFF1B)
-    mlx_destroy_window(mlx,win3);
+	mlx_destroy_window(mlx,win3);
 }
 
 int	mouse_win1(int button,int x,int y, void *p)
@@ -96,25 +96,25 @@ int	main()
   printf("MinilibX Test Program\n");
   a = 0x11223344;
   if (((unsigned char *)&a)[0] == 0x11)
-    local_endian = 1;
+	local_endian = 1;
   else
-    local_endian = 0;
+	local_endian = 0;
   printf(" => Local Endian : %d\n",local_endian);
 
   printf(" => Connection ...");
   if (!(mlx = mlx_init()))
-    {
-      printf(" !! KO !!\n");
-      exit(1);
-    }
+	{
+	  printf(" !! KO !!\n");
+	  exit(1);
+	}
   printf("OK (use_xshm %d pshm_format %d)\n",((t_xvar *)mlx)->use_xshm,((t_xvar *)mlx)->pshm_format);
 
   printf(" => Window1 %dx%d \"Title 1\" ...",WIN1_SX,WIN1_SY);
   if (!(win1 = mlx_new_window(mlx,WIN1_SX,WIN1_SY,"Title1")))
-    {
-      printf(" !! KO !!\n");
-      exit(1);
-    }
+	{
+	  printf(" !! KO !!\n");
+	  exit(1);
+	}
   printf("OK\n");
 
   printf(" => Colormap sans event ...");
@@ -129,10 +129,10 @@ int	main()
 
   printf(" => Image1 ZPixmap %dx%d ...",IM1_SX,IM1_SY);
   if (!(im1 = mlx_new_image(mlx,IM1_SX,IM1_SY)))
-    {
-      printf(" !! KO !!\n");
-      exit(1);
-    }
+	{
+	  printf(" !! KO !!\n");
+	  exit(1);
+	}
   data1 = mlx_get_data_addr(im1,&bpp1,&sl1,&endian1);
   printf("OK (bpp1: %d, sizeline1: %d endian: %d type: %d)\n",bpp1,sl1,endian1,
 	 ((t_img *)im1)->type);
@@ -153,10 +153,10 @@ int	main()
 
   printf(" => Image3 ZPixmap %dx%d ...",IM3_SX,IM3_SY);
   if (!(im3 = mlx_new_image(mlx,IM3_SX,IM3_SY)))
-    {
-      printf(" !! KO !!\n");
-      exit(1);
-    }
+	{
+	  printf(" !! KO !!\n");
+	  exit(1);
+	}
   data3 = mlx_get_data_addr(im3,&bpp3,&sl3,&endian3);
   printf("OK (bpp3 %d, sizeline3 %d endian3 %d type %d)\n",bpp3,sl3,endian3,
 	 ((t_img *)im3)->type);
@@ -178,10 +178,10 @@ int	main()
 
   printf(" => Xpm from file ...");
   if (!(im2 = mlx_xpm_file_to_image(mlx,"open.xpm",&xpm1_x,&xpm1_y)))
-    {
-      printf(" !! KO !!\n");
-      exit(1);
-    }
+	{
+	  printf(" !! KO !!\n");
+	  exit(1);
+	}
   data2 = mlx_get_data_addr(im2,&bpp2,&sl2,&endian2);
   printf("OK (xpm %dx%d)(img bpp2: %d, sizeline2: %d endian: %d type: %d)\n",
 	 xpm1_x,xpm1_y,bpp2,sl2,endian2,((t_img *)im2)->type);
@@ -196,10 +196,10 @@ int	main()
   printf(" => 2nd window,");
   win2 = mlx_new_window(mlx,WIN1_SX,WIN1_SY,"Title2");
   if (!(im4 = mlx_new_image(mlx,IM3_SX, IM3_SY)))
-    {
-      printf(" !! KO !!\n");
-      exit(1);
-    }
+	{
+	  printf(" !! KO !!\n");
+	  exit(1);
+	}
   data4 = mlx_get_data_addr(im4,&bpp4,&sl4,&endian4);
   color_map_2(data4,bpp4,sl4,IM3_SX,IM3_SY,endian4, 2);
 
@@ -229,14 +229,14 @@ int	color_map_1(void *win,int w,int h)
 
   x = w;
   while (x--)
-    {
-      y = h;
-      while (y--)
-        {
-          color = (x*255)/w+((((w-x)*255)/w)<<16)+(((y*255)/h)<<8);
+	{
+	  y = h;
+	  while (y--)
+		{
+		  color = (x*255)/w+((((w-x)*255)/w)<<16)+(((y*255)/h)<<8);
 	  mlx_pixel_put(mlx,win,x,y,color);
-        }
-    }
+		}
+	}
 }
 
 
@@ -254,34 +254,34 @@ int	color_map_2(unsigned char *data,int bpp,int sl,int w,int h,int endian, int t
   printf("(opp : %d) ",opp);
   y = h;
   while (y--)
-    {
-      ptr = data+y*sl;
-      x = w;
-      while (x--)
-        {
+	{
+	  ptr = data+y*sl;
+	  x = w;
+	  while (x--)
+		{
 	  if (type==2)
-	    color = (y*255)/w+((((w-x)*255)/w)<<16)
-	      +(((y*255)/h)<<8);
+		color = (y*255)/w+((((w-x)*255)/w)<<16)
+		  +(((y*255)/h)<<8);
 	  else
-	    color = (x*255)/w+((((w-x)*255)/w)<<16)+(((y*255)/h)<<8);
-          color2 = mlx_get_color_value(mlx,color);
+		color = (x*255)/w+((((w-x)*255)/w)<<16)+(((y*255)/h)<<8);
+		  color2 = mlx_get_color_value(mlx,color);
 	  dec = opp;
 	  while (dec--)
-	    if (endian==local_endian)
-	      {
+		if (endian==local_endian)
+		  {
 		if (endian)
 		  *(ptr+x*opp+dec) = ((unsigned char *)(&color2))[4-opp+dec];
 		else
 		  *(ptr+x*opp+dec) = ((unsigned char *)(&color2))[dec];
-	      }
-	    else
-	      {
+		  }
+		else
+		  {
 		if (endian)
 		  *(ptr+x*opp+dec) = ((unsigned char *)(&color2))[opp-1-dec];
 		else
 		  *(ptr+x*opp+dec) = ((unsigned char *)(&color2))[3-dec];
-	      }
-        }
-    }
+		  }
+		}
+	}
 
 }

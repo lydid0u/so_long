@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 16:44:12 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/07 13:09:30 by lboudjel         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   movement.c										 :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: lboudjel <lboudjel@student.42.fr>		  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2023/10/02 16:44:12 by lboudjel		  #+#	#+#			 */
+/*   Updated: 2023/10/07 13:09:30 by lboudjel		 ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "../so_long.h"
@@ -17,7 +17,7 @@ int	ft_move(int keysym, t_jeu *jeu)
 	if (keysym == 65307)
 	{
 		free_all(jeu);
-		disconnect(jeu);
+		destroy(jeu);
 		exit(EXIT_SUCCESS);
 	}
 	if (keysym == 65363 || keysym == 100)
@@ -28,8 +28,7 @@ int	ft_move(int keysym, t_jeu *jeu)
 		go_up(jeu);
 	if (keysym == 65364 || keysym == 115)
 		go_down(jeu);
-	// mlx_loop_hook(jeu->mlx_ptr, animation_loop, jeu);
-	mlx_loop_hook(jeu->mlx_ptr, animation_loop_nmi, jeu);
+	mlx_loop_hook(jeu->mlx_ptr, animation_loop, jeu);
 	return (0);
 }
 
@@ -43,7 +42,7 @@ void	go_right(t_jeu *jeu)
 		if (jeu->map_p[jeu->x][jeu->y + 1] == 'E' && jeu->coin == 0)
 			ft_printf("Yay congrats!! It's now time to do the dishes :)\n");
 		free_all(jeu);
-		disconnect(jeu);
+		destroy(jeu);
 		exit(EXIT_SUCCESS);
 	}
 	if (jeu->map_p[jeu->x][jeu->y + 1] == '1' || jeu->map_p[jeu->x][jeu->y
@@ -72,7 +71,7 @@ void	go_left(t_jeu *jeu)
 		if (jeu->map_p[jeu->x][jeu->y - 1] == 'E' && jeu->coin == 0)
 			ft_printf("Yay congrats!! It's now time to do the dishes :)\n");
 		free_all(jeu);
-		disconnect(jeu);
+		destroy(jeu);
 		exit(EXIT_SUCCESS);
 	}
 	if (jeu->map_p[jeu->x][jeu->y - 1] == '1' || jeu->map_p[jeu->x][jeu->y
@@ -101,7 +100,7 @@ void	go_up(t_jeu *jeu)
 		if (jeu->map_p[jeu->x - 1][jeu->y] == 'E' && jeu->coin == 0)
 			ft_printf("Yay congrats!! It's now time to do the dishes :)\n");
 		free_all(jeu);
-		disconnect(jeu);
+		destroy(jeu);
 		exit(EXIT_SUCCESS);
 	}
 	if (jeu->map_p[jeu->x - 1][jeu->y] == '1' || jeu->map_p[jeu->x
@@ -130,7 +129,7 @@ void	go_down(t_jeu *jeu)
 		if (jeu->map_p[jeu->x + 1][jeu->y] == 'E' && jeu->coin == 0)
 			ft_printf("Yay congrats!! It's now time to do the dishes :)\n");
 		free_all(jeu);
-		disconnect(jeu);
+		destroy(jeu);
 		exit(EXIT_SUCCESS);
 	}
 	if (jeu->map_p[jeu->x + 1][jeu->y] == '1' || jeu->map_p[jeu->x

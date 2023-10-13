@@ -14,7 +14,7 @@
 
 
 int		mlx_pixel_put(t_xvar *xvar,t_win_list *win,
-			      int x,int y,int color)
+				  int x,int y,int color)
 {
    XGCValues	xgcv;
    
@@ -22,5 +22,5 @@ int		mlx_pixel_put(t_xvar *xvar,t_win_list *win,
    XChangeGC(xvar->display,win->gc,GCForeground,&xgcv);
    XDrawPoint(xvar->display,win->window,win->gc,x,y);
    if (xvar->do_flush)
-     XFlush(xvar->display);
+	 XFlush(xvar->display);
 }

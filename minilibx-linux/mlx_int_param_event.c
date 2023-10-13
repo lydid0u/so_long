@@ -17,21 +17,21 @@ int	mlx_int_param_undef()
 int	mlx_int_param_KeyPress(t_xvar *xvar, XEvent *ev, t_win_list *win)
 {
   win->hooks[KeyPress].hook(XkbKeycodeToKeysym(xvar->display,
-					       ev->xkey.keycode, 0, 0),
-			    win->hooks[KeyPress].param);
+						   ev->xkey.keycode, 0, 0),
+				win->hooks[KeyPress].param);
 }
 
 int	mlx_int_param_KeyRelease(t_xvar *xvar, XEvent *ev, t_win_list *win)
 {
   win->hooks[KeyRelease].hook(XkbKeycodeToKeysym(xvar->display,
 						 ev->xkey.keycode, 0, 0),
-			      win->hooks[KeyRelease].param);
+				  win->hooks[KeyRelease].param);
 }
 
 int	mlx_int_param_ButtonPress(t_xvar *xvar, XEvent *ev, t_win_list *win)
 {
   win->hooks[ButtonPress].hook(ev->xbutton.button,ev->xbutton.x,ev->xbutton.y,
-			       win->hooks[ButtonPress].param);
+				   win->hooks[ButtonPress].param);
 }
 
 int	mlx_int_param_ButtonRelease(t_xvar *xvar, XEvent *ev, t_win_list *win)
@@ -50,7 +50,7 @@ int	mlx_int_param_MotionNotify(t_xvar *xvar, XEvent *ev, t_win_list *win)
 int	mlx_int_param_Expose(t_xvar *xvar, XEvent *ev, t_win_list *win)
 {
   if (!ev->xexpose.count)
-    win->hooks[Expose].hook(win->hooks[Expose].param);
+	win->hooks[Expose].hook(win->hooks[Expose].param);
 }
 
 

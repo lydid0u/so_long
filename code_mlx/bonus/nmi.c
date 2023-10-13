@@ -1,4 +1,4 @@
-#include "../so_long.h"
+#include "../../so_long.h"
 
 void	don_left(t_jeu *jeu, int i, int j)
 {

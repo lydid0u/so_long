@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_checker2.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/24 14:45:55 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/02 16:39:52 by lboudjel         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   map_checker2.c									 :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: lboudjel <lboudjel@student.42.fr>		  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2023/09/24 14:45:55 by lboudjel		  #+#	#+#			 */
+/*   Updated: 2023/10/02 16:39:52 by lboudjel		 ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "../so_long.h"
@@ -102,13 +102,13 @@ int	check_map(t_jeu *jeu)
 		free_map(jeu->map_p);
 		return (0);
 	}
-	if (!(mur_haut_bas(jeu)))
+	if (!(wall_up_down(jeu)))
 	{
 		free_map(jeu->map);
 		free_map(jeu->map_p);
 		return (0);
 	}
-	if (!(contenu_ligne(jeu, 1)))
+	if (!(content_line(jeu, 1)))
 	{
 		free_map(jeu->map);
 		free_map(jeu->map_p);

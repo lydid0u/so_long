@@ -121,13 +121,13 @@ int	mlx_int_xpm_set_pixel(t_img *img, char *data, int opp, int col, int x)
 	
 	dec = opp;
   	while (dec--)
-    {
-    	if (img->image->byte_order)
+	{
+		if (img->image->byte_order)
 			*(data+x*opp+dec) = col&0xFF;
-      	else
+	  	else
 			*(data+x*opp+opp-dec-1) = col&0xFF;
-      	col >>= 8;
-    }
+	  	col >>= 8;
+	}
 }
 
 

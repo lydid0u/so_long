@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_checker.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/24 14:45:46 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/06 12:07:06 by lboudjel         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   map_checker.c									  :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: lboudjel <lboudjel@student.42.fr>		  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2023/09/24 14:45:46 by lboudjel		  #+#	#+#			 */
+/*   Updated: 2023/10/06 12:07:06 by lboudjel		 ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "../so_long.h"
@@ -80,7 +80,7 @@ int	create_map(char *av1, t_jeu *jeu, int i)
 	return (close(fd), 1);
 }
 
-int	mur_haut_bas(t_jeu *jeu)
+int	wall_up_down(t_jeu *jeu)
 {
 	int	i;
 	int	j;
@@ -109,7 +109,7 @@ int	mur_haut_bas(t_jeu *jeu)
 	return (1);
 }
 
-int	contenu_ligne(t_jeu *jeu, int i)
+int	content_line(t_jeu *jeu, int i)
 {
 	int	j;
 	int	longueur;

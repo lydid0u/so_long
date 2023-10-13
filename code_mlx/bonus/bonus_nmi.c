@@ -1,4 +1,4 @@
-#include "../so_long.h"
+#include "../../so_long.h"
 
 void	anim_nmi(t_jeu *jeu, int i, int j)
 {
@@ -28,10 +28,4 @@ void	ft_reset_nmi(t_jeu *jeu)
 {
 	if (jeu->bonus_nmi == 100)
 		jeu->bonus_nmi = 0;
-}
-
-int	animation_loop_nmi(t_jeu *jeu)
-{
-	anim_nmi(jeu, 0, 0); 
-	return (0); 
 }

@@ -1,18 +1,18 @@
-NAME    = so_long
+NAME	= so_long
 
-CC              = clang
+CC			  = clang
 
 CFLAGS  = -Wall -Wextra -Werror -g3
 
-RM              = rm -f
+RM			  = rm -f
 
-PRINTF        = ft_printf
+PRINTF		= ft_printf
 
-FT_PRINTF    = ft_printf/libftprintf.a
+FT_PRINTF	= ft_printf/libftprintf.a
 
-SRC     = so_long.c ./parsing/map_checker.c ./parsing/map_checker2.c ./parsing/map_checker3.c ./parsing/flood_fill.c ./code_mlx/new_windows.c ./code_mlx/nmi.c ./code_mlx/bonus_tea.c ./code_mlx/bonus_watah.c ./code_mlx/bonus_nmi.c ./code_mlx/movement.c ./code_mlx/utils.c ./code_mlx/copy.c ./code_mlx/tea.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
+SRC	 = so_long.c ./parsing/map_checker.c ./parsing/map_checker2.c ./parsing/map_checker3.c ./parsing/flood_fill.c ./code_mlx/new_windows.c ./code_mlx/bonus/nmi.c ./code_mlx/bonus/bonus_tea.c ./code_mlx/bonus/bonus_exit.c ./code_mlx/bonus/bonus_nmi.c ./code_mlx/movement.c ./code_mlx/utils.c ./code_mlx/copy.c ./code_mlx/bonus/sink.c ./code_mlx/bonus/tea.c ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 
-OBJ    = ${SRC:.c=.o}
+OBJ	= ${SRC:.c=.o}
 
 all : ${NAME}
 
