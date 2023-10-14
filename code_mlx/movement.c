@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 14:33:35 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/14 14:46:29 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:17:14 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ int	ft_move(int keysym, t_jeu *jeu)
 	if (keysym == 65364 || keysym == 115)
 		go_down(jeu);
 	mlx_loop_hook(jeu->mlx_ptr, animation_loop, jeu);
+	if (jeu->coin == 0)
+	{
+		jeu->map_p[jeu->exit_x][jeu->exit_y] = 'E';
+		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor,
+			jeu->exit_y * 64, jeu->exit_x * 64);
+	}
 	return (0);
 }
 

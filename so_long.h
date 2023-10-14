@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:09:32 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/14 15:09:50 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:20:00 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_jeu
 	int		exit;
 	int		len;
 	int		nmi;
+	int		exit_x;
+	int		exit_y;
 	char	**map_f;
 	char	**map_p;
 	void	*mlx_ptr;
@@ -97,6 +99,7 @@ void		print_moves(t_jeu *jeu);
 char		*ft_itoa(int nb);
 int			ft_countlen(long int n);
 void		loop_hook(t_jeu *jeu);
+void		find_pos_exit(t_jeu *jeu, int i, int j);
 
 //movement
 void		go_right(t_jeu *jeu);

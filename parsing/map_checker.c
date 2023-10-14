@@ -81,7 +81,7 @@ int	check_letter(t_jeu *jeu)
 			else if (jeu->map_p[i][j] == 'D')
 				jeu->nmi++;
 			else if (jeu->map_p[i][j] == 'E')
-				jeu->exit++;
+				find_pos_exit(jeu, i, j);
 			j++;
 		}
 		i++;

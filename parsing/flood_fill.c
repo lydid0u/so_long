@@ -23,7 +23,7 @@ void	change_ennemi_and_exit_to_wall(t_jeu *jeu)
 		j = 0;
 		while (jeu->map_f[i][j])
 		{
-			if (jeu->map_f[i][j] == 'D' || jeu->map_f[i][j] == 'E')
+			if (jeu->map_f[i][j] == 'D')
 				jeu->map_f[i][j] = '1';
 			j++;
 		}

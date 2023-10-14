@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 14:34:52 by lboudjel          #+#    #+#             */
-/*   Updated: 2023/10/14 15:08:08 by lboudjel         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:15:26 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ void	print_img(t_jeu *jeu, int i, int j)
 			* 64, i * 64);
 	if (jeu->map_p[i][j] == '1')
 		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_wall, j
-			* 64, i * 64);
-	if (jeu->map_p[i][j] == 'E')
-		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_exit, j
 			* 64, i * 64);
 	if (jeu->map_p[i][j] == '0')
 		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_floor, j
