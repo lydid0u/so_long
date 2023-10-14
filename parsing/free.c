@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*																			*/
 /*														:::	  ::::::::   */
-/*   map_checker3.c									 :+:	  :+:	:+:   */
+/*   free.c									 :+:	  :+:	:+:   */
 /*													+:+ +:+		 +:+	 */
 /*   By: lboudjel <lboudjel@student.42.fr>		  +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
@@ -12,31 +12,20 @@
 
 #include "../so_long.h"
 
-int	check_letter(t_jeu *jeu)
+int	free_map(char **carte)
 {
 	int	i;
-	int	j;
 
+	if (!carte)
+		return (0);
 	i = 0;
-	while (jeu->map_p[i])
+	while (carte[i])
 	{
-		j = 0;
-		while (jeu->map_p[i][j])
-		{
-			if (jeu->map_p[i][j] == 'C')
-				jeu->coin++;
-			else if (jeu->map_p[i][j] == 'P')
-				jeu->perso++;
-			else if (jeu->map_p[i][j] == 'D')
-				jeu->nmi++;
-			else if (jeu->map_p[i][j] == 'E')
-				jeu->exit++;
-			j++;
-		}
+		free(carte[i]);
 		i++;
 	}
-	if (!(error_letter(jeu)))
-		return (0);
+	free(carte);
+	carte = NULL;
 	return (1);
 }
 

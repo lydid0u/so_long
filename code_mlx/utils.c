@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   utils.c											:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: lboudjel <lboudjel@student.42.fr>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2023/10/02 17:33:35 by lboudjel		  #+#	#+#			 */
-/*   Updated: 2023/10/07 12:16:53 by lboudjel		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/14 14:46:59 by lboudjel          #+#    #+#             */
+/*   Updated: 2023/10/14 15:08:08 by lboudjel         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
@@ -60,48 +60,39 @@ char	*ft_itoa(int nb)
 	return (str);
 }
 
-int	exit_and_leave(t_jeu *jeu)
+void	loop_hook(t_jeu *jeu)
 {
-	free_all(jeu);
-	destroy(jeu);
-	exit(EXIT_SUCCESS);
+	img_to_window(jeu, 0, 0);
+	mlx_key_hook(jeu->win_ptr, ft_move, jeu);
+	mlx_hook(jeu->win_ptr, DestroyNotify, StructureNotifyMask, exit_and_leave,
+		jeu);
+	mlx_loop(jeu->mlx_ptr);
 }
 
-int	destroy(t_jeu *jeu)
-{
-	if (jeu->img_wall)
-		mlx_destroy_image(jeu->mlx_ptr, jeu->img_wall);
-	if (jeu->img_floor)
-		mlx_destroy_image(jeu->mlx_ptr, jeu->img_floor);
-	if (jeu->img_right)
-		mlx_destroy_image(jeu->mlx_ptr, jeu->img_right);
-	if (jeu->img_left)
-		mlx_destroy_image(jeu->mlx_ptr, jeu->img_left);
-	if (jeu->img_exit)
-		mlx_destroy_image(jeu->mlx_ptr, jeu->img_exit);
-	if (jeu->img_perso)
-		mlx_destroy_image(jeu->mlx_ptr, jeu->img_perso);
-	if (jeu->img_coin)
-		mlx_destroy_image(jeu->mlx_ptr, jeu->img_coin);
-	if (jeu->img_nmi)
-		mlx_destroy_image(jeu->mlx_ptr, jeu->img_nmi);
-	if (jeu->pied)
-		mlx_destroy_image(jeu->mlx_ptr, jeu->pied);
-	if (jeu->img_lamp)
-		mlx_destroy_image(jeu->mlx_ptr, jeu->img_lamp);
-	if (jeu->mlx_ptr)
-	{
-		mlx_loop_end(jeu->mlx_ptr);
-		mlx_destroy_window(jeu->mlx_ptr, jeu->win_ptr);
-		mlx_destroy_display(jeu->mlx_ptr);
-		free(jeu->mlx_ptr);
-	}
-	// destroy_two(jeu);
-	exit(0);
-}
-
-// void	destroy_two(t_jeu *jeu)
+// int	destroy(t_jeu *jeu)
 // {
+// 	if (jeu->img_coin)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_coin);
+// 	if (jeu->img_wall)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_wall);
+// 	if (jeu->img_exit)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_exit);
+// 	if (jeu->img_floor)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_floor);
+// 	if (jeu->img_right)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_right);
+// 	if (jeu->img_left)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_left);
+// 	if (jeu->img_perso)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_perso);
+// 	if (jeu->img_nmi)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_nmi);
+// 	if (jeu->img_plant)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_plant);
+// 	if (jeu->img_lamp)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_lamp);
+// 	if (jeu->img_steps)
+// 		mlx_destroy_image(jeu->mlx_ptr, jeu->img_steps);
 // 	if (jeu->mlx_ptr)
 // 	{
 // 		mlx_loop_end(jeu->mlx_ptr);
@@ -109,4 +100,17 @@ int	destroy(t_jeu *jeu)
 // 		mlx_destroy_display(jeu->mlx_ptr);
 // 		free(jeu->mlx_ptr);
 // 	}
+// 	// destroy_two(jeu);
+// 	exit(0);
 // }
+
+// // void	destroy_two(t_jeu *jeu)
+// // {
+// // 	if (jeu->mlx_ptr)
+// // 	{
+// // 		mlx_loop_end(jeu->mlx_ptr);
+// // 		mlx_destroy_window(jeu->mlx_ptr, jeu->win_ptr);
+// // 		mlx_destroy_display(jeu->mlx_ptr);
+// // 		free(jeu->mlx_ptr);
+// // 	}
+// // }

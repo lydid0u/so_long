@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 		jeu.map_f = copy_map(jeu.map);
 		change_ennemi_and_exit_to_wall(&jeu);
 		flood_fill(jeu.x, jeu.y, &jeu);
-		if (!(check_flood(&jeu)))
+		if (!(flood_fill_checker(&jeu)))
 			return (0);
 		jeu.mlx_ptr = mlx_init();
 		if (!jeu.mlx_ptr)

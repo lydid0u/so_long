@@ -34,23 +34,6 @@ void	nbr_of_line(char *av1, t_jeu *jeu)
 	close(fd);
 }
 
-int	free_map(char **carte)
-{
-	int	i;
-
-	if (!carte)
-		return (0);
-	i = 0;
-	while (carte[i])
-	{
-		free(carte[i]);
-		i++;
-	}
-	free(carte);
-	carte = NULL;
-	return (1);
-}
-
 int	create_map(char *av1, t_jeu *jeu, int i)
 {
 	int		fd;
@@ -80,60 +63,80 @@ int	create_map(char *av1, t_jeu *jeu, int i)
 	return (close(fd), 1);
 }
 
-int	wall_up_down(t_jeu *jeu)
+int	check_letter(t_jeu *jeu)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 0;
-	while (jeu->map_p[0][i])
-	{
-		if (jeu->map_p[0][i] != '1' && jeu->map_p[0][i] != '\n')
-		{
-			ft_printf("Error\nUp wall should only contains 1 !");
-			return (0);
-		}
-		i++;
-	}
-	while (jeu->map_p[jeu->nbr_ligne - 1][j])
-	{
-		if (jeu->map_p[jeu->nbr_ligne - 1][j] != '1'
-			&& jeu->map_p[jeu->nbr_ligne - 1][j] != '\n')
-		{
-			ft_printf("Error\nDown wall should only contains 1 !");
-			return (0);
-		}
-		j++;
-	}
-	return (1);
-}
-
-int	content_line(t_jeu *jeu, int i)
-{
-	int	j;
-	int	longueur;
-
-	longueur = ft_strlen(jeu->map_p[i]);
-	while (i < jeu->nbr_ligne - 1)
+	while (jeu->map_p[i])
 	{
 		j = 0;
-		while (jeu->map_p[i][j] && j < longueur - 1)
+		while (jeu->map_p[i][j])
 		{
-			if (jeu->map_p[i][0] != '1' || jeu->map_p[i][longueur - 1] != '1')
-				return (ft_printf("Error\nEnds must contain '1' only!\n"), 0);
-			else if (jeu->map_p[i][j] != '0' && jeu->map_p[i][j] != '1'
-					&& jeu->map_p[i][j] != 'C' && jeu->map_p[i][j] != 'P'
-					&& jeu->map_p[i][j] != 'E' && jeu->map_p[i][j] != 'D')
-				return (ft_printf("Error\nIncompatible character!\n"), 0);
-			if (jeu->map_p[i][j] == 'P')
-			{
-				jeu->x = i;
-				jeu->y = j;
-			}
+			if (jeu->map_p[i][j] == 'C')
+				jeu->coin++;
+			else if (jeu->map_p[i][j] == 'P')
+				jeu->perso++;
+			else if (jeu->map_p[i][j] == 'D')
+				jeu->nmi++;
+			else if (jeu->map_p[i][j] == 'E')
+				jeu->exit++;
 			j++;
 		}
 		i++;
+	}
+	if (!(error_letter(jeu)))
+		return (0);
+	return (1);
+}
+
+int	check_valid_name(char *av1)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(av1) - 1;
+	if (av1[len] == 'r')
+		i++;
+	if (av1[len - 1] == 'e')
+		i++;
+	if (av1[len - 2] == 'b')
+		i++;
+	if (av1[len - 3] == '.')
+		i++;
+	if (i == 4)
+		return (1);
+	else
+		return (ft_printf("Error\nFile's name is not valid !"), 0);
+}
+
+int	check_map(t_jeu *jeu)
+{
+	if (!(line_size(jeu)))
+	{
+		free_map(jeu->map);
+		free_map(jeu->map_p);
+		return (0);
+	}
+	if (!(wall_up_down(jeu)))
+	{
+		free_map(jeu->map);
+		free_map(jeu->map_p);
+		return (0);
+	}
+	if (!(content_line(jeu, 1)))
+	{
+		free_map(jeu->map);
+		free_map(jeu->map_p);
+		return (0);
+	}
+	if (!(check_letter(jeu)))
+	{
+		free_map(jeu->map);
+		free_map(jeu->map_p);
+		return (0);
 	}
 	return (1);
 }

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   new_windows.c									  :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: lboudjel <lboudjel@student.42.fr>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2023/09/25 14:23:24 by lboudjel		  #+#	#+#			 */
-/*   Updated: 2023/10/03 19:03:28 by lboudjel		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   new_windows.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/14 14:34:52 by lboudjel          #+#    #+#             */
+/*   Updated: 2023/10/14 15:08:08 by lboudjel         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
@@ -18,54 +18,56 @@ int	xpm_to_img(t_jeu *jeu)
 	jeu->height = 64;
 	jeu->img_coin = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/tea01.xpm",
 			&jeu->width, &jeu->height);
-		if(!jeu->img_coin)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	if (!jeu->img_coin)
+		return (exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
 	jeu->img_wall = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/plant.xpm",
 			&jeu->width, &jeu->height);
-		if(!jeu->img_wall)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	if (!jeu->img_wall)
+		return (exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
 	jeu->img_exit = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/door.xpm",
 			&jeu->width, &jeu->height);
-		if(!jeu->img_exit)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	if (!jeu->img_exit)
+		return (exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
 	jeu->img_floor = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/floor.xpm",
 			&jeu->width, &jeu->height);
-		if(!jeu->img_floor)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));	
+	if (!jeu->img_floor)
+		return (exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	return (1);
+}
+
+int	xpm_to_img_two(t_jeu *jeu)
+{
 	jeu->img_right = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/right.xpm",
 			&jeu->width, &jeu->height);
-		if(!jeu->img_right)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	if (!jeu->img_right)
+		return (exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
 	jeu->img_left = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/left.xpm",
 			&jeu->width, &jeu->height);
-		if(!jeu->img_left)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	if (!jeu->img_left)
+		return (exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
 	jeu->img_perso = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/perso.xpm",
 			&jeu->width, &jeu->height);
-		if(!jeu->img_perso)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	if (!jeu->img_perso)
+		return (exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
 	jeu->img_nmi = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/don.xpm",
 			&jeu->width, &jeu->height);
-		if(!jeu->img_nmi)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
-	jeu->img_plant = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/plant2.xpm",
-			&jeu->width, &jeu->height);
-		if(!jeu->img_plant)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	if (!jeu->img_nmi)
+		return (exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
 	jeu->img_lamp = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/lamp.xpm",
 			&jeu->width, &jeu->height);
-		if(!jeu->img_lamp)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
-	jeu->pied = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/doubl.xpm",
+	if (!jeu->img_lamp)
+		return (exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	jeu->img_steps = mlx_xpm_file_to_image(jeu->mlx_ptr, "./xpm/doubl.xpm",
 			&jeu->width, &jeu->height);
-		if(!jeu->pied)
-			return(exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
+	if (!jeu->img_steps)
+		return (exit_and_leave(jeu), ft_printf("Error\nImage incorrect !", 0));
 	return (1);
 }
 
 void	img_to_window(t_jeu *jeu, int i, int j)
 {
 	xpm_to_img(jeu);
+	xpm_to_img_two(jeu);
 	while (jeu->map_p[i])
 	{
 		j = 0;
@@ -84,14 +86,8 @@ void	print_img(t_jeu *jeu, int i, int j)
 		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_coin, j
 			* 64, i * 64);
 	if (jeu->map_p[i][j] == '1')
-	{
-		// if (j % 3 == 0)
-			mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_wall, j
-				* 64, i * 64);
-		// // else 
-		// 	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_plant, j
-		// 		* 64, i * 64);
-	}
+		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_wall, j
+			* 64, i * 64);
 	if (jeu->map_p[i][j] == 'E')
 		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_exit, j
 			* 64, i * 64);
@@ -104,7 +100,7 @@ void	print_img(t_jeu *jeu, int i, int j)
 	if (jeu->map_p[i][j] == 'D')
 		mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_nmi, j
 			* 64, i * 64);
-	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->pied, 0, 0);
+	mlx_put_image_to_window(jeu->mlx_ptr, jeu->win_ptr, jeu->img_steps, 0, 0);
 }
 
 void	print_moves(t_jeu *jeu)
@@ -121,13 +117,4 @@ void	print_moves(t_jeu *jeu)
 	mlx_string_put(jeu->mlx_ptr, jeu->win_ptr, 78, 30, 0xFFFFFF,
 		jeu->win_steps);
 	free(jeu->win_steps);
-}
-
-void	loop_hook(t_jeu *jeu)
-{
-	img_to_window(jeu, 0, 0);
-	mlx_key_hook(jeu->win_ptr, ft_move, jeu);
-	mlx_hook(jeu->win_ptr, DestroyNotify, StructureNotifyMask, exit_and_leave,
-		jeu);
-	mlx_loop(jeu->mlx_ptr);
 }

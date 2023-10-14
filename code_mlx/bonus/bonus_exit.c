@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bonus_exit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/14 14:49:42 by lboudjel          #+#    #+#             */
+/*   Updated: 2023/10/14 14:49:43 by lboudjel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../so_long.h"
 
 void	frame_sink(t_jeu *jeu, int i, int j)
@@ -17,8 +29,8 @@ void	frame_sink(t_jeu *jeu, int i, int j)
 
 void	anim_exit(t_jeu *jeu)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	ft_reset_sink(jeu);
